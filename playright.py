@@ -2,14 +2,15 @@ from playwright.sync_api import sync_playwright
 from bs4 import BeautifulSoup
 import pandas as pd
 data_dict = {}
+
 with sync_playwright() as p:
-    browser = p.chromium.launch(headless=False)
+    browser = p.chromium.launch(headless=True)
     page = browser.new_page()
     page.goto('https://quotes.toscrape.com/login')
-    page.fill('input#username','mouiz')
-    page.fill('input#password','123')
+    page.fill('input#username','mx new')
+    page.fill('input#password','123@#')
     page.click('input[type=submit]')
-    page.wait_for_timeout(4000)
+    # page.wait_for_timeout(4000)
     html_content = page.content()
     code = BeautifulSoup(html_content, 'html.parser')
   
@@ -28,6 +29,6 @@ with sync_playwright() as p:
 df = pd.DataFrame(data_dict)
 print(df.shape)
 print(df.head)
-df.to_csv('data.csv', index=False)
+# df.to_csv('data.csv', index=False)
 
     

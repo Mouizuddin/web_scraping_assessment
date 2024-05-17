@@ -78,7 +78,7 @@ if choosen_tag:
     pagination_in_products = pagination(to_scrape_url)
 
     if len(pagination_in_products) >= 1:
-        st.write(f'selected link have total  >> {len(pagination_in_products)} pages and {total_products} products' )
+        st.write(f'selected link have total  >> {len(pagination_in_products)} page and {total_products} products' )
     else:
         st.write(f'selected link have total  >> {len(pagination_in_products)} page and {total_products} products' )
 
@@ -108,6 +108,8 @@ if choosen_tag:
             inner_page_code = BeautifulSoup(inner_page, 'html.parser')
             des = inner_page_code.find('div',{'id':'product_description'}).find_next('p').text.strip()
             warning_text = inner_page_code.find('div',{'class':'alert alert-warning'}).text.strip()
+            title = inner_page_code.find('h1').text.strip()
+            meta_data['title'] = title
             meta_data['Product Description'] = des
             meta_data['Product Link'] = pass_link
             book_type = inner_page_code.find('ul',{'class':'breadcrumb'}).find_all('li')[2].text.strip()
